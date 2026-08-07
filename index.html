@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Game Predictor - Depozit</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .console-box {
+      font-family: monospace;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 20px #00ff88;
+      color: #00ff88;
+      height: 250px;
+      overflow-y: auto;
+    }
+    .loading-screen {
+      font-family: monospace;
+      background: #000;
+      color: #00ff88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+      z-index: 50;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .hidden-screen {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <div id="loading" class="loading-screen">
+    <p>Učitavanje... Molimo sačekajte dok pripremimo vaše iskustvo.</p>
+  </div>
+
+  <div id="mainContent" class="hidden-screen">
+    <header class="w-full bg-gray-800 p-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-green-400">1xBet AI Predictor</h1>
+      <nav class="space-x-4">
+        <a href="#how" class="hover:text-green-400">Kako radi</a>
+        <a href="#games" class="hover:text-green-400">Igre</a>
+        <a href="#start" class="hover:text-green-400">Započni</a>
+      </nav>
+    </header>
+
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">Zaradite pravi novac uz AI predikcije</h2>
+      <p class="max-w-xl mb-8 text-gray-300">Hiljade igrača u Srbiji koristi naš AI za pobedu u igrama kao što su Aviator, Mines i Penalty. 98% preciznost signala, predikcije u realnom vremenu i brze isplate.</p>
+
+      <input id="userId" type="text" placeholder="Unesite vaš 1xBet Account ID" class="bg-gray-700 text-white p-3 rounded-md mb-4" />
+      <button id="connectButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-xl text-lg transition">Poveži nalog</button>
+
+      <div id="connectionSuccess" class="hidden text-green-400 font-bold mt-6">
+        <p>ID naloga: <span id="accountIdDisplay">1254567890</span> je uspešno povezan!</p>
+        <p>Status: Aktivan | 100% Preciznost | Algoritmi analizirani</p>
+        <button id="getSignalButton" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition mt-4">Preuzmi signal</button>
+      </div>
+
+      <div id="errorBox" class="hidden bg-red-600 p-6 rounded-xl max-w-md mx-auto mt-6">
+        <h2 class="text-xl font-bold mb-2">⚠️ Depozit nije pronađen</h2>
+        <p class="mb-2">Izgleda da je vaš balans prazan. Molimo uplatite 1100 RSD da biste otključali signale i počeli sa dobitkom.</p>
+        <p class="mb-4 font-bold text-yellow-300">Iskoristite promo kod: RSD777</p>
+        <a href="https://refpa3665.com/L?tag=e_5673736m_96329c_&site=5673736&ad=96329&r=registration" target="_blank" id="depositButton" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition">
+          Uplati odmah na 1xBet
+        </a>
+      </div>
+    </section>
+
+    <section class="bg-gray-800 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Top dobitnici danas (RSD)</h3>
+      <div class="grid md:grid-cols-2 gap-4 text-left max-w-4xl mx-auto text-sm text-green-300">
+        <p>👤 User ID: 1718473422 – 52 450 RSD</p>
+        <p>👤 User ID: 1711238474 – 58 900 RSD</p>
+        <p>👤 User ID: 1709234822 – 54 120 RSD</p>
+        <p>👤 User ID: 1717339121 – 59 800 RSD</p>
+        <p>👤 User ID: 1712900113 – 51 300 RSD</p>
+        <p>👤 User ID: 1713721091 – 56 750 RSD</p>
+        <p>👤 User ID: 1711937742 – 53 200 RSD</p>
+        <p>👤 User ID: 1714921811 – 57 800 RSD</p>
+        <p>👤 User ID: 1713238742 – 55 600 RSD</p>
+        <p>👤 User ID: 1717749301 – 60 000 RSD</p>
+      </div>
+    </section>
+
+    <section id="games" class="bg-gray-800 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Podržane igre</h3>
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold mb-2">🎮 Aviator</h4>
+          <p class="text-gray-300">Predvidite kada treba uzeti novac pre nego što avion odleti. Naš AI prepoznaje obrasce u realnom vremenu.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="bg-gray-900 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Kako radi</h3>
+      <div class="max-w-3xl mx-auto space-y-4 text-gray-300">
+        <p>📡 Naš AI analizira podatke uživo i istorijske rezultate 24/7.</p>
+        <p>💡 Prepoznaje obrasce koji dosledno donose profit.</p>
+        <p>📲 Primate predikcije u realnom vremenu direktno na vaš uređaj.</p>
+      </div>
+    </section>
+
+    <section class="bg-black py-12 px-6 text-center">
+      <h3 class="text-xl font-bold text-green-400 mb-4">[ Console Log ]</h3>
+      <div class="console-box max-w-3xl mx-auto text-left" id="console">
+        <p>[INFO] Prediktor servis aktivan ✅</p>
+      </div>
+    </section>
+
+    <footer class="text-center text-gray-500 text-sm py-6">
+      © 2026 AI Predictor. Nije povezano sa 1xBet. Koristite odgovorno.
+    </footer>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById("loading").classList.add("hidden-screen");
+      document.getElementById("mainContent").classList.remove("hidden-screen");
+    }, 3000);
+
+    document.getElementById("connectButton").addEventListener("click", () => {
+      const userId = document.getElementById("userId").value;
+      if (userId) {
+        document.getElementById("accountIdDisplay").innerText = userId;
+        document.getElementById("connectionSuccess").classList.remove("hidden");
+        document.getElementById("errorBox").classList.add("hidden");
+      }
+    });
+
+    document.getElementById("getSignalButton").addEventListener("click", () => {
+      document.getElementById("errorBox").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
